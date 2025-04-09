@@ -5,7 +5,7 @@ An interactive web-based tool designed to help understand the often counter-intu
 <img width="726" alt="Screenshot" src="https://github.com/user-attachments/assets/a69c8c4f-783b-4323-9045-773bd3a41dcf" />
 
 ## Demo
-**[Live Demo]** 👈 Click here to try it out! ()
+**[Live Demo](https://edisedis777.github.io/Bayesian-Test-Results-Calculator/)** 👈 Click here to try it out!
 
 ## Features
 

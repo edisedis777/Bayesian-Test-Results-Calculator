@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bayesian Test Results Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+    <meta
+      name="description"
+      content="Interactive tool to understand Bayesian probability in test results and medical screening" />
+  </head>
+  <body>
+    <div class="dark-mode-toggle">
+      <label class="toggle-switch">
+        <input type="checkbox" id="dark-mode-toggle" />
+        <span class="slider"></span>
+      </label>
+      <span class="toggle-label">Dark Mode</span>
+    </div>
+
+    <div class="container">
+      <h1>Bayesian Test Results Calculator</h1>
+      <p class="subtitle">Understanding how test results affect probability</p>
+
+      <div class="calculator">
+        <div class="input-section">
+          <div class="input-group">
+            <label for="prevalence">Base rate (prevalence):</label>
+            <input
+              type="range"
+              id="prevalence"
+              min="0.001"
+              max="0.5"
+              step="0.001"
+              value="0.01"
+              aria-labelledby="prevalence-label" />
+            <!-- Removed aria-describedby and info bubble -->
+            <span id="prevalence-value" class="value-display">1%</span>
+            <!-- Info Bubble Removed -->
+          </div>
+
+          <div class="input-group">
+            <label for="sensitivity">Test sensitivity:</label>
+            <input
+              type="range"
+              id="sensitivity"
+              min="0.5"
+              max="0.99"
+              step="0.01"
+              value="0.9"
+              aria-labelledby="sensitivity-label" />
+            <!-- Removed aria-describedby and info bubble -->
+            <span id="sensitivity-value" class="value-display">90%</span>
+            <!-- Info Bubble Removed -->
+          </div>
+
+          <div class="input-group">
+            <label for="falsePositive">False positive rate:</label>
+            <input
+              type="range"
+              id="falsePositive"
+              min="0.01"
+              max="0.5"
+              step="0.01"
+              value="0.05"
+              aria-labelledby="falsePositive-label" />
+            <!-- Removed aria-describedby and info bubble -->
+            <span id="falsePositive-value" class="value-display">5%</span>
+            <!-- Info Bubble Removed -->
+          </div>
+
+          <!-- Replaced previous content with a parameter summary linked to the formula -->
+          <div class="parameter-summary">
+            <h3>Understanding the Inputs:</h3>
+            <p>
+              These sliders control the key components of Bayes' Theorem for
+              this scenario:
+            </p>
+            <ul>
+              <li>
+                <strong>Prevalence (Base Rate):</strong> Corresponds to the
+                <code>Prevalence</code> term in the formula – the initial
+                probability of the condition before testing.
+              </li>
+              <li>
+                <strong>Sensitivity:</strong> Relates to the likelihood of a
+                positive test if the condition *is* present (used in
+                <code>Prevalence × Sensitivity</code>).
+              </li>
+              <li>
+                <strong>False Positive Rate:</strong> The probability of a
+                positive test if the condition *is not* present (used in
+                <code>(1 – Prevalence) × FalsePositiveRate</code>).
+              </li>
+            </ul>
+            <p>
+              Adjust them to see how each impacts the final calculated
+              probability below.
+            </p>
+          </div>
+        </div>
+
+        <div class="results-section">
+          <h2>What does a positive test mean?</h2>
+          <div class="result-box">
+            <p>
+              Given a positive test result, the probability that the condition
+              is present:
+            </p>
+            <div class="probability-result" id="posterior" aria-live="polite">
+              16.1%
+            </div>
+          </div>
+
+          <div class="visualization">
+            <h3>Visual Representation</h3>
+            <div class="visualization-container">
+              <div
+                class="prior-bar"
+                role="img"
+                aria-label="Prior probability visualization">
+                <div class="prior-positive" id="prior-positive"></div>
+                <div class="prior-label">Prior</div>
+              </div>
+              <div
+                class="posterior-bar"
+                role="img"
+                aria-label="Posterior probability visualization">
+                <div class="posterior-positive" id="posterior-positive"></div>
+                <div class="posterior-label">Posterior</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="interpretation">
+            <h3>Interpretation</h3>
+            <p id="interpretation-text" aria-live="polite">
+              With these parameters, even after a positive test, there's only a
+              16.1% chance the condition is actually present.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="historical-context">
+        <h2>Historical Context: Bayes' Theorem</h2>
+        <div class="historical-timeline">
+          <div class="timeline-item">
+            <span class="timeline-date">1701-1761:</span>
+            <p>
+              Thomas Bayes, an English statistician and Presbyterian minister,
+              developed the theorem but never published it during his lifetime.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">1763:</span>
+            <p>
+              Richard Price, Bayes' friend, found the work after Bayes' death
+              and published "An Essay towards solving a Problem in the Doctrine
+              of Chances."
+            </p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">1774:</span>
+            <p>
+              Pierre-Simon Laplace independently developed and extended the
+              theorem, bringing it into mainstream mathematics.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">1950s-1960s:</span>
+            <p>
+              After being largely overlooked for nearly two centuries, Bayesian
+              methods experienced a resurgence with advances in computing power.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">Present day:</span>
+            <p>
+              Bayes' theorem is now fundamental in medicine, law, machine
+              learning, and many other fields where updating beliefs based on
+              new evidence is critical.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="explanation">
+        <h2>How It Works: Bayes' Theorem</h2>
+        <div class="formula-container">
+          <span class="formula-term">P(Condition | Positive) = </span>
+          <div class="fraction">
+            <span class="numerator">Prevalence × Sensitivity</span>
+            <span class="denominator"
+              >(Prevalence × Sensitivity) + ((1 – Prevalence) ×
+              FalsePositiveRate)</span
+            >
+          </div>
+        </div>
+        <div class="key-insights">
+          <h3>Key Insights:</h3>
+          <ul>
+            <li>
+              When a condition is rare, even a good test can yield many false
+              positives relative to true positives.
+            </li>
+            <li>
+              The impact of a positive test depends primarily on the event's
+              prevalence and the test's false positive rate.
+            </li>
+            <li>
+              If the initial probability (prevalence) of a condition is
+              extremely low, a positive test might not substantially raise the
+              final probability.
+            </li>
+            <li>
+              This is why medical screening for rare conditions often requires
+              follow-up testing.
+            </li>
+            <li>
+              The "base rate fallacy" occurs when people ignore the prior
+              probability (prevalence) and overestimate the meaning of a
+              positive test.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,709 @@
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f9f9fb;
+  color: #333;
+  line-height: 1.6;
+  padding-top: 60px; /* Add padding to prevent content from hiding under fixed toggle */
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px; /* Added margin for spacing */
+}
+
+.subtitle {
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+/* Calculator styles */
+.calculator {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.input-section,
+.results-section {
+  flex: 1;
+  min-width: 250px;
+  padding: 10px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  position: relative; /* Keep for potential future additions, though not strictly needed now */
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-bottom: 8px;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  appearance: none; /* Standard syntax */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3498db;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3498db;
+  cursor: pointer;
+  border: none; /* Ensure no default border */
+}
+
+.value-display {
+  display: inline-block;
+  min-width: 45px;
+  text-align: right;
+  font-weight: bold;
+}
+
+/* REMOVED info bubble styles */
+/* .info-bubble { ... } */
+/* .input-group:hover .info-bubble, .input-group:focus-within .info-bubble { ... } */
+
+/* Results styles */
+.results-section h2 {
+  /* Target h2 within results */
+  margin-bottom: 15px;
+}
+
+.result-box {
+  background-color: #f0f7ff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.probability-result {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #3498db;
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Visualization styles (inside results section) */
+.visualization {
+  margin-top: 20px; /* Space above visualization */
+  margin-bottom: 20px; /* Space below visualization */
+}
+
+.visualization-container {
+  margin-top: 10px; /* Reduced margin */
+}
+
+.prior-bar,
+.posterior-bar {
+  height: 25px; /* Made smaller */
+  background-color: #ecf0f1;
+  margin-bottom: 10px; /* Reduced margin */
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden; /* Hide overflow */
+}
+
+.prior-positive,
+.posterior-positive {
+  height: 100%;
+  background-color: #3498db;
+  border-radius: 5px 0 0 5px; /* Keep left radius */
+  width: 0%; /* Initial width */
+  transition: width 0.5s ease;
+  position: absolute; /* Ensure it covers background */
+  left: 0;
+  top: 0;
+}
+
+.prior-positive[style*="width: 100%"],
+.posterior-positive[style*="width: 100%"] {
+  border-radius: 5px;
+}
+
+.prior-label,
+.posterior-label {
+  position: absolute;
+  left: 8px; /* Adjusted position */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem; /* Slightly smaller label */
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  z-index: 1; /* Ensure label is above the bar fill */
+}
+
+/* Interpretation styles */
+.interpretation {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+  margin-top: 15px; /* Ensure space from visualization */
+}
+
+.interpretation h3 {
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+/* Explanation section */
+.explanation,
+.historical-context {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Formula styles */
+.formula-container {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif; /* More math-like font */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.formula-term {
+  font-size: 1.2rem;
+  margin-right: 5px; /* Space before fraction */
+}
+
+.fraction {
+  display: inline-flex; /* Use flex for vertical alignment */
+  flex-direction: column; /* Stack numerator/denominator */
+  align-items: center; /* Center items horizontally */
+  font-size: 1.1rem;
+  line-height: 1.2; /* Adjust line height for fraction */
+}
+
+.numerator {
+  border-bottom: 1px solid #333; /* Fraction line */
+  padding: 0 5px 2px 5px; /* Spacing around numerator */
+  display: block; /* Ensure it takes full width needed */
+}
+
+.denominator {
+  padding: 2px 5px 0 5px; /* Spacing around denominator */
+  display: block; /* Ensure it takes full width needed */
+  font-size: 0.9em; /* Make denominator slightly smaller */
+  word-break: break-all; /* Added for long denominators on small screens */
+}
+
+/* Style for the parameter summary section */
+.parameter-summary {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #f0f7ff; /* Light blue background */
+  border-radius: 5px;
+  border-left: 4px solid #3498db; /* Blue left border */
+}
+
+.parameter-summary h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.parameter-summary p {
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.parameter-summary ul {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+}
+.parameter-summary li {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+.parameter-summary code {
+  /* Style inline code for formula terms */
+  font-family: "Courier New", monospace;
+  background-color: #e9ecef;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.85rem;
+}
+
+.key-insights ul,
+.historical-timeline ul {
+  /* Combined rules */
+  padding-left: 20px;
+  margin-top: 10px;
+  list-style: disc; /* Ensure bullets are visible */
+}
+
+.key-insights li {
+  /* Keep separate if specific styling needed */
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+/* Historical context styles */
+.historical-timeline {
+  /* Target the container div */
+  margin-top: 15px; /* Add space below heading */
+}
+
+.timeline-item {
+  margin-bottom: 15px;
+  padding-left: 25px; /* Increased padding for better alignment */
+  position: relative;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px; /* Adjusted vertical position */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #3498db;
+}
+
+.timeline-date {
+  font-weight: bold;
+  color: #2c3e50;
+  display: block; /* Make date appear on its own line */
+  margin-bottom: 3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1.1rem; /* Slightly smaller h3 */
+    margin-bottom: 8px;
+  }
+
+  .subtitle,
+  .key-insights li,
+  .timeline-item p,
+  .parameter-summary p,
+  .parameter-summary li {
+    font-size: 0.9rem; /* Smaller paragraph/list text */
+  }
+
+  .calculator,
+  .visualization,
+  .explanation,
+  .historical-context {
+    padding: 15px;
+  }
+
+  .calculator {
+    flex-direction: column;
+  }
+
+  .input-section,
+  .results-section {
+    width: 100%;
+    padding: 5px 0; /* Adjust padding */
+  }
+
+  .input-group {
+    margin-bottom: 15px; /* Reduced input group margin */
+  }
+
+  label {
+    margin-bottom: 6px; /* Reduced label margin */
+  }
+
+  .probability-result {
+    font-size: 1.8rem;
+  }
+
+  .formula-container {
+    font-size: 0.9rem; /* Adjust formula size */
+    padding: 10px;
+  }
+  .formula-term {
+    font-size: 1rem;
+  }
+  .fraction {
+    font-size: 0.9rem;
+  }
+  .denominator {
+    font-size: 0.85em;
+  }
+
+  .visualization {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .visualization-container {
+    margin-top: 8px;
+  }
+  .prior-bar,
+  .posterior-bar {
+    height: 20px; /* Even smaller bars on medium screens */
+    margin-bottom: 8px;
+  }
+  .prior-label,
+  .posterior-label {
+    font-size: 0.75rem; /* Smaller labels on bars */
+  }
+
+  .parameter-summary {
+    margin-top: 15px;
+    padding: 10px;
+  }
+  .parameter-summary h3 {
+    font-size: 1rem;
+  }
+  .parameter-summary code {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 70px; /* More space for toggle on small screens */
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    margin-bottom: 8px; /* Less margin below h1 */
+  }
+
+  h2 {
+    font-size: 1.2rem; /* Slightly smaller h2 */
+    margin-bottom: 12px; /* Less margin below h2 */
+  }
+  h3 {
+    font-size: 1rem; /* Even smaller h3 */
+    margin-bottom: 6px; /* Less margin for h3 */
+  }
+
+  .subtitle,
+  .key-insights li,
+  .timeline-item p,
+  .parameter-summary p,
+  .parameter-summary li {
+    font-size: 0.85rem; /* Even smaller paragraph/list text */
+    margin-bottom: 8px; /* Less margin for paragraphs/lists */
+  }
+
+  .calculator,
+  .visualization,
+  .explanation,
+  .historical-context {
+    padding: 12px; /* Even less padding on smallest screens */
+    margin-bottom: 15px; /* Less bottom margin between sections */
+  }
+
+  .input-group {
+    margin-bottom: 12px; /* Even less margin between input groups */
+  }
+  label {
+    font-size: 0.9rem; /* Slightly smaller label font */
+    margin-bottom: 5px;
+  }
+  .value-display {
+    font-size: 0.9rem; /* Smaller value display font */
+  }
+
+  .probability-result {
+    font-size: 1.6rem; /* Smaller result font */
+  }
+
+  .formula-container {
+    padding: 8px;
+    font-size: 0.85rem; /* Even smaller formula font */
+    flex-direction: column; /* Stack vertically if too long */
+    align-items: flex-start;
+  }
+  .formula-term {
+    margin-bottom: 3px;
+    font-size: 0.9rem; /* Even smaller formula term */
+  }
+  .fraction {
+    font-size: 0.8rem; /* Even smaller fraction font */
+  }
+  .denominator {
+    font-size: 0.75em; /* Even smaller denominator font */
+    word-break: break-all; /* Ensure very long denominators wrap */
+  }
+
+  .dark-mode-toggle {
+    top: 10px; /* Adjust position slightly for small screens */
+    right: 10px;
+  }
+  .toggle-label {
+    display: none; /* Hide label text on very small screens */
+  }
+  .toggle-switch {
+    width: 40px; /* Even smaller toggle */
+    height: 20px;
+  }
+  .slider:before {
+    height: 12px;
+    width: 12px;
+    left: 3px;
+    bottom: 3px;
+  }
+  input:checked + .slider:before {
+    transform: translateX(21px); /* Adjust slider thumb position */
+  }
+
+  .visualization {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .visualization-container {
+    margin-top: 6px;
+  }
+  .prior-bar,
+  .posterior-bar {
+    height: 16px; /* Even smaller bars on smallest screens */
+    margin-bottom: 6px;
+  }
+  .prior-label,
+  .posterior-label {
+    font-size: 0.7rem; /* Even smaller labels on bars */
+    left: 6px; /* Adjust label position */
+  }
+
+  .parameter-summary {
+    margin-top: 12px;
+    padding: 8px;
+  }
+  .parameter-summary h3 {
+    font-size: 0.95rem;
+  }
+  .parameter-summary p,
+  .parameter-summary li {
+    font-size: 0.8rem;
+  }
+  .parameter-summary code {
+    font-size: 0.75rem;
+  }
+}
+
+/* Accessibility improvements */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Toggle switch */
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #3498db;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.toggle-label {
+  margin-left: 8px;
+  font-size: 0.9rem;
+  color: #333; /* Ensure label color contrasts */
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode label,
+body.dark-mode .timeline-date,
+body.dark-mode .parameter-summary h3 {
+  /* Added parameter summary h3 */
+  color: #e0e0e0;
+}
+
+body.dark-mode .calculator,
+body.dark-mode .explanation,
+body.dark-mode .historical-context {
+  background-color: #16213e;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .result-box {
+  background-color: #0f3460;
+}
+
+body.dark-mode .interpretation,
+body.dark-mode .formula-container {
+  /* Target formula container */
+  background-color: #1f3a63;
+  color: #e0e0e0;
+}
+
+/* Dark mode formula fraction line */
+body.dark-mode .numerator {
+  border-bottom-color: #e0e0e0;
+}
+
+body.dark-mode .prior-bar,
+body.dark-mode .posterior-bar {
+  background-color: #2c3e50;
+}
+
+body.dark-mode .subtitle {
+  color: #a0a0a0;
+}
+
+body.dark-mode .toggle-label {
+  color: #e0e0e0; /* Dark mode label color */
+}
+
+body.dark-mode input[type="range"] {
+  background: #2c3e50; /* Darker track */
+}
+
+body.dark-mode input[type="range"]::-webkit-slider-thumb {
+  background: #5fa8d3; /* Lighter thumb for contrast */
+}
+
+body.dark-mode input[type="range"]::-moz-range-thumb {
+  background: #5fa8d3;
+}
+
+/* Dark mode parameter summary */
+body.dark-mode .parameter-summary {
+  background-color: #0f3460; /* Match result box background */
+  border-left-color: #5fa8d3; /* Lighter blue border */
+}
+
+body.dark-mode .parameter-summary p,
+body.dark-mode .parameter-summary li {
+  color: #bdc3c7; /* Lighter text for dark mode */
+}
+body.dark-mode .parameter-summary code {
+  background-color: #2c3e50; /* Darker code background */
+  color: #e0e0e0;
+}

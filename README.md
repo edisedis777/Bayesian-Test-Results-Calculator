@@ -1,12 +1,11 @@
 # Bayesian Test Results Calculator 📊
 
-An interactive web-based tool designed to help understand the often counter-intuitive results of diagnostic tests using Bayes' Theorem. This calculator visually and textually demonstrates how the base rate (prevalence) of a condition significantly impacts the true probability of having that condition given a positive test result.
+An interactive web-based tool designed to help understand the often counter-intuitive results of diagnostic tests using Bayes' Theorem. This calculator visually and textually demonstrates how the base rate (prevalence) of a condition significantly impacts the true probability of having that condition given a positive test result. It serves as an educational resource to combat the base rate fallacy and provide a clearer understanding of conditional probability in real-life scenarios.
 
-It serves as an educational resource to combat the base rate fallacy and provide a clearer understanding of conditional probability in real-world scenarios like medical screening.
+<img width="726" alt="Screenshot" src="https://github.com/user-attachments/assets/a69c8c4f-783b-4323-9045-773bd3a41dcf" />
 
-**[Live Demo]** 👈 Click here to try it out!
-
-[![Calculator Screenshot](screenshot.png)]() <!-- Replace with path to your screenshot -->
+## Demo
+**[Live Demo]** 👈 Click here to try it out! ()
 
 ## Features
 

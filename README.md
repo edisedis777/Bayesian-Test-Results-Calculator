@@ -10,15 +10,8 @@ An interactive web-based tool designed to help understand the often counter-intu
 ## Features
 
 *   **Interactive Sliders:** Adjust the Prevalence (Base Rate), Test Sensitivity, and False Positive Rate.
-*   **Real-Time Calculation:** Instantly see the calculated Posterior Probability (the probability of having the condition given a positive test).
-*   **Clear Interpretation:** Get a plain-language explanation of what the calculated probability means in context.
 *   **Visual Representation:** Compare the Prior Probability (Prevalence) and the Posterior Probability side-by-side with dynamic bar charts.
-*   **Formula Display:** See the specific formula used for the calculation.
-*   **Parameter Summary:** Understand how each input slider relates to the terms in Bayes' Theorem.
-*   **Key Insights:** Read important takeaways about interpreting test results and understanding the base rate fallacy.
-*   **Historical Context:** Learn about the origins of Bayes' Theorem and its key figures.
 *   **Dark Mode:** Toggle between light and dark themes for comfortable viewing.
-*   **Responsive Design:** Works well on desktop, tablet, and mobile devices.
 
 ## How It Works
 

@@ -66,4 +66,4 @@ This tool demonstrates a concept formalized by **Thomas Bayes** (1701-1761), pos
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+Distributed under the GNU Affero General Public License v3.0 License. See `LICENSE` for more information.
